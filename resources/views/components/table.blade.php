@@ -10,9 +10,9 @@
         <tbody>
             @foreach ($tableData['data'] as $index => $row)
                 @if($index%2 == 0)
-                    <tr style="background-color: #1b1e2d; color:white" class="border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr class="bg-black border-b dark:bg-gray-800 dark:border-gray-700">
                 @else
-                    <tr style="background-color:rgb(231, 231, 231)" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr class="bg-white border-b dark:bg-white-800 dark:border-gray-700">
                 @endif
 
                 @foreach ($row as $index2 => $cell)
