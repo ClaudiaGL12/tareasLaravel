@@ -5,6 +5,7 @@
                 @foreach ($tableData['heading'] as $heading)
                 <th scope="col" class="px-6 py-3">{{$heading}}</th>    
                 @endforeach
+                <th scope="col" class="px-6 py-3">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,10 @@
                         </td>
                     @endif
                 @endforeach
+                    <td>
+                        <a href="#" name="editar_{{$index}}">Editar</a>
+                        <a href="#" name="borrar_{{$index}}">Borrar</a>
+                    </td>
                 </tr>    
             @endforeach
         </tbody>
