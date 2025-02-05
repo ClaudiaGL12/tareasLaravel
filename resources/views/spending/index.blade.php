@@ -3,20 +3,20 @@
   <x-table :tableData="$tableData"/>
 
   {{-- primera forma 
-    <x-button :anyadirIncome="$anyadirIncome">
-    Add income
+    <x-button :anyadirIncome="$anyadirSpending">
+    Add Spending
     </x-button> botón anterior 
   --}}
 
   <div style="mt-5">
     <x-button href="https://laravel.com">
-      Add income
+      Add Spending
     </x-button>
   </div>
 
   <div style="m-5">
     <x-button href="https://laravel.com" class="clase1 clase2">
-      Add income
+      Add Spending
     </x-button>
   </div>
 

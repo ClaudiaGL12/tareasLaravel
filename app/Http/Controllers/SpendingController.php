@@ -3,30 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 
-class IncomeController extends Controller
+class SpendingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        // $tableData = [
-        //     'heading' => [
-        //         'date','category','amount'
-        //     ],
-        //     'data' => [
-        //         ['12/12/2012','salary','2500'],
-        //         ['12/01/2013','salary','2500'],
-        //         ['12/02/2013','salary','2550']
-        //     ]
-        // ]; 
-
-        $tableData = DB::table("incomes")->select('date', 'amount', 'category');
-
+        $tableData = [
+            'heading' => [
+                'date','category','amount'
+            ],
+            'data' => [
+                ['12/12/2012','salary','2500'],
+                ['12/01/2013','salary','2500'],
+                ['12/02/2013','salary','2550']
+            ]
+        ]; 
         //Aquí la lógica de negocio para el index
-        return view('income.index',['title' => 'My incomes', 'tableData' => $tableData, 'anyadirIncome' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);
+        return view('spending.index',['title' => 'My spendings', 'tableData' => $tableData, 'anyadirSpending' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);
         
     }
 
@@ -36,7 +29,7 @@ class IncomeController extends Controller
     public function create()
     {
         //
-        return '<p>Esta es la página del create de incomes</p>';
+        return '<p>Esta es la página del create de spendings</p>';
     }
 
     /**
@@ -53,7 +46,7 @@ class IncomeController extends Controller
     public function show(string $id)
     {
         //
-        return '<p>Esta es la página del show de incomes</p>';
+        return '<p>Esta es la página del show de spendings</p>';
     }
 
     /**
@@ -62,7 +55,7 @@ class IncomeController extends Controller
     public function edit(string $id)
     {
         //
-        return '<p>Esta es la página del edit de incomes</p>';
+        return '<p>Esta es la página del edit de spendings</p>';
     }
 
     /**
