@@ -23,7 +23,7 @@ class IncomeController extends Controller
         //     ]
         // ]; 
 
-        $tableData = DB::table("incomes")->select('date', 'amount', 'category');
+        $tableData = DB::table("incomes")->select('date', 'amount', 'category')->get()->toArray();
 
         //Aquí la lógica de negocio para el index
         return view('income.index',['title' => 'My incomes', 'tableData' => $tableData, 'anyadirIncome' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);

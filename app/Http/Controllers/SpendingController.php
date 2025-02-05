@@ -3,21 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class SpendingController extends Controller
 {
     public function index()
     {
-        $tableData = [
-            'heading' => [
-                'date','category','amount'
-            ],
-            'data' => [
-                ['12/12/2012','salary','2500'],
-                ['12/01/2013','salary','2500'],
-                ['12/02/2013','salary','2550']
-            ]
-        ]; 
+        // $tableData = [
+        //     'heading' => [
+        //         'date','category','amount'
+        //     ],
+        //     'data' => [
+        //         ['12/12/2012','salary','2500'],
+        //         ['12/01/2013','salary','2500'],
+        //         ['12/02/2013','salary','2550']
+        //     ]
+        // ]; 
+
+        $tableData = DB::table("spending")->select('date', 'amount', 'category')->get()->toArray();
+
         //Aquí la lógica de negocio para el index
         return view('spending.index',['title' => 'My spendings', 'tableData' => $tableData, 'anyadirSpending' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);
         
