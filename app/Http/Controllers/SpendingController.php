@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+//use DB;
+use App\Models\Spending;
+
 
 class SpendingController extends Controller
 {
@@ -20,8 +22,9 @@ class SpendingController extends Controller
         //     ]
         // ]; 
 
-        $tableData = DB::table("spending")->select('date', 'amount', 'category')->get()->toArray();
-
+        //$tableData = DB::table("spending")->select('date', 'amount', 'category')->get()->toArray();
+        $tableData = Spending::select('date', 'amount', 'category')->get()->toArray();
+        
         //Aquí la lógica de negocio para el index
         return view('spending.index',['title' => 'My spendings', 'tableData' => $tableData, 'anyadirSpending' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);
         
@@ -33,7 +36,8 @@ class SpendingController extends Controller
     public function create()
     {
         //
-        return '<p>Esta es la página del create de spendings</p>';
+        //return '<p>Esta es la página del create de spendings</p>';
+        return view('spending.create', ['title' => 'My spendings']);
     }
 
     /**
@@ -41,7 +45,18 @@ class SpendingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'amount' => 'required|numeric',
+            'category' => 'required|in:impuestos,compras',
+        ]);
+        
+        Spending::create([
+            'date' => now(),
+            'amount' => $request->amount,
+            'category' => $request->category,
+        ]);
+
+        return redirect('spending');
     }
 
     /**

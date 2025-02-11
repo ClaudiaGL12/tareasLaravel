@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+//use DB;
+use App\Models\Income;
+use Illuminate\Http\RedirectResponse;
+
 
 class IncomeController extends Controller
 {
@@ -23,8 +26,9 @@ class IncomeController extends Controller
         //     ]
         // ]; 
 
-        $tableData = DB::table("incomes")->select('date', 'amount', 'category')->get()->toArray();
-
+        //$tableData = DB::table("incomes")->select('date', 'amount', 'category')->get()->toArray();
+        $tableData = Income::select('date', 'amount', 'category')->get()->toArray();
+        
         //Aquí la lógica de negocio para el index
         return view('income.index',['title' => 'My incomes', 'tableData' => $tableData, 'anyadirIncome' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);
         
@@ -35,16 +39,26 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        //
-        return '<p>Esta es la página del create de incomes</p>';
+        return view('income.create', ['title' => 'My incomes']);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+     public function store(Request $request) //: RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'amount' => 'required|numeric',
+            'category' => 'required|in:ingresos,pagas',
+        ]);
+        
+        Income::create([
+            'date' => now(),
+            'amount' => $request->amount,
+            'category' => $request->category,
+        ]);
+
+        return redirect('incomes');
     }
 
     /**
@@ -52,7 +66,6 @@ class IncomeController extends Controller
      */
     public function show(string $id)
     {
-        //
         return '<p>Esta es la página del show de incomes</p>';
     }
 

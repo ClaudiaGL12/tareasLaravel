@@ -9,15 +9,17 @@
   --}}
 
   <div style="mt-5">
-    <x-button href="https://laravel.com">
+    <x-button href="./incomes/create">
       Add income
     </x-button>
   </div>
 
+  {{-- para comprobar que funciona
   <div style="m-5">
     <x-button href="https://laravel.com" class="clase1 clase2">
       Add income
     </x-button>
   </div>
+  --}}
 
 </x-layouts.index>

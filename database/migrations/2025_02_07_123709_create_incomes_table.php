@@ -13,16 +13,8 @@ return new class extends Migration
     {
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->double('amount');
-            $table->string('category');
-            $table->timestamps();
-        });
-
-        Schema::create('spending', function (Blueprint $table) {
-            $table->id();
-            $table->date('date');
-            $table->double('amount');
+            $table->date('date')->default(now());
+            $table->double('amount', 10, 2);
             $table->string('category');
             $table->timestamps();
         });
@@ -34,6 +26,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('incomes');
-        Schema::dropIfExists('spending');
     }
 };
