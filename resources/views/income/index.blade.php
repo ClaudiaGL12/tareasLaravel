@@ -9,7 +9,7 @@
   --}}
 
   <div style="mt-5">
-    <x-button href="./incomes/create">
+    <x-button href="{{route('incomes.create')}}">
       Add income
     </x-button>
   </div>

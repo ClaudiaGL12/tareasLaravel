@@ -2,7 +2,7 @@
   {{-- formulario: componente --}}
   <x-income.formAddInc />
   <div style="mt-5">
-    <x-button href="../incomes">
+    <x-button href="{{route('incomes')}}">
       Volver a incomes
     </x-button>
   </div>

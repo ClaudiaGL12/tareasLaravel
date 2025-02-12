@@ -1,6 +1,6 @@
 <div>
     <h1>Página para añadir un spending</h1>
-    <form action="{{route("spending.store")}}" method="POST">
+    <form action="{{route('spending.store')}}" method="POST">
         @csrf
         <label for="amount">Cantidad:</label>
         <input type="number" name="amount" min="1" value="1" required>
