@@ -45,13 +45,15 @@ class SpendingController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'amount' => 'required|numeric',
+        $validator = $request->validate([
+            'date' => 'required',
+            'amount' => 'required|min:1|decimal:2',
             'category' => 'required|in:impuestos,compras',
         ]);
         
         Spending::create([
-            'date' => now(),
+            //'date' => now(),
+            'date' => $request->date,
             'amount' => $request->amount,
             'category' => $request->category,
         ]);
