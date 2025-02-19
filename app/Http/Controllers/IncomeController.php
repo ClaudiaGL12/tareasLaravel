@@ -39,7 +39,7 @@ class IncomeController extends Controller
     public function create(Request $request)
     {
         // dump($request);
-        return view('income.create', ['title' => 'New income', 'title' => 'My incomes']);
+        return view('income.create', ['title' => 'New income']);
     }
 
     /**
