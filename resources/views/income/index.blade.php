@@ -7,13 +7,6 @@
     Add income
     </x-button> botón anterior 
   --}}
-
-  <div style="mt-5">
-    <x-button href="{{route('incomes.create')}}">
-      Add income
-    </x-button>
-  </div>
-
   {{-- para comprobar que funciona
   <div style="m-5">
     <x-button href="https://laravel.com" class="clase1 clase2">
@@ -22,4 +15,9 @@
   </div>
   --}}
 
+  <div style="mt-5">
+    <x-button href="{{route('incomes.create')}}">
+      Add income
+    </x-button>
+  </div>
 </x-layouts.index>

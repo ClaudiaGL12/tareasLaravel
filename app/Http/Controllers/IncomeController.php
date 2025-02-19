@@ -28,7 +28,6 @@ class IncomeController extends Controller
 
         //$tableData = DB::table("incomes")->select('date', 'amount', 'category')->get()->toArray();
         $tableData = Income::select('date', 'amount', 'category')->get()->toArray();
-        
         //Aquí la lógica de negocio para el index
         return view('income.index',['title' => 'My incomes', 'tableData' => $tableData, 'anyadirIncome' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);
         
@@ -37,9 +36,10 @@ class IncomeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('income.create', ['title' => 'My incomes']);
+        // dump($request);
+        return view('income.create', ['title' => 'New income', 'title' => 'My incomes']);
     }
 
     /**
@@ -47,8 +47,8 @@ class IncomeController extends Controller
      */
      public function store(Request $request) //: RedirectResponse
     {
-        $validated = $request->validate([
-            'amount' => 'required|numeric',
+        $validator = $request->validate([
+            'amount' => 'required|min:1|decimal:2',
             'category' => 'required|in:ingresos,pagas',
         ]);
         

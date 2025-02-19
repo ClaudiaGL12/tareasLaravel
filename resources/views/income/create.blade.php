@@ -1,8 +1,10 @@
 <x-layouts.index :title="$title">
-  {{-- formulario: componente --}}
+  @if ($errors->any())
+    <x-alert message="Parece que ha habido algunos problemas."/>
+  @endif
   <x-income.formAddInc />
   <div style="mt-5">
-    <x-button href="{{route('incomes')}}">
+    <x-button href="{{route('incomes.index')}}">
       Volver a incomes
     </x-button>
   </div>
