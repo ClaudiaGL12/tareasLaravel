@@ -13,7 +13,7 @@ class IncomeController extends Controller
     public array $links= [
         "My Incomes" => "incomes",
         "My Spending" => "spending",
-        //"Categories" => "categories"
+        "Categories" => "categories"
     ];
     //para compartir con todas las vistas
     public function __construct()
@@ -38,7 +38,15 @@ class IncomeController extends Controller
         // ]; 
 
         //$tableData = DB::table("incomes")->select('date', 'amount', 'category')->get()->toArray();
-        $tableData = Income::select('id','date', 'amount', 'category')->get()->toArray();
+        //$tableData = Income::select('id','date', 'amount', 'category')->get()->toArray();
+        $tableData = Income::with('category')->get()->map(function($income) {
+            return [
+                'id' => $income->id,
+                'date' => $income->date,
+                'amount' => $income->amount,
+                'category' => ucfirst($income->category->name),
+            ];
+        });
         //$tableData = Income::all();
         //Aquí la lógica de negocio para el index
         return view('income.index',['title' => 'My incomes', 'tableData' => $tableData, 'pagina' => 'incomes', 'anyadirIncome' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);

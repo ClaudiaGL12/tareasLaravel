@@ -13,7 +13,7 @@ class SpendingController extends Controller
     public array $links= [
         "My Spending" => "spending",
         "My Incomes" => "incomes",
-        //"Categories" => "categories"
+        "Categories" => "categories"
     ];
     //para compartir con todas las vistas
     public function __construct()
@@ -23,7 +23,14 @@ class SpendingController extends Controller
 
     public function index()
     {
-        $tableData = Spending::select('id','date', 'amount', 'category')->get()->toArray();
+        $tableData = Spending::with('category')->get()->map(function($spending) {
+            return [
+                'id' => $spending->id,
+                'date' => $spending->date,
+                'amount' => $spending->amount,
+                'category' => ucfirst($spending->category->name),
+            ];
+        });
         //Aquí la lógica de negocio para el index
         return view('spending.index',['title' => 'My spendings', 'tableData' => $tableData, 'pagina'=>'spending' ,'anyadirSpending' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);
         

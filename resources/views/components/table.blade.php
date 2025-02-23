@@ -17,8 +17,8 @@
                     <tr class="bg-white border-b dark:bg-white-800 dark:border-gray-700">
                 @endif
 
-                @foreach ($row as $index2 => $cell)
-                    @if($index2 == 0)
+                @foreach ($row as $key => $cell)
+                    @if($key == 'id')
                         <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                         <b>{{$cell}}</b>
                         </th>

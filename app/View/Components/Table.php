@@ -11,7 +11,7 @@ class Table extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public array $tableData, public $pagina)
+    public function __construct(public $tableData, public $pagina)
     {
         //
     }

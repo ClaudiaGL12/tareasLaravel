@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\SpendingController;
+use App\Http\Controllers\CategoriesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,3 +26,7 @@ Route::get('spending/{id}', [SpendingController::class, 'show'])->name('spending
 Route::post('/spending/{id}/edit', [SpendingController::class, 'edit'])->name('spending.edit');
 Route::put('/spending/{id}', [SpendingController::class, 'update'])->name('spending.update');
 Route::delete('/spending', [SpendingController::class, 'destroy'])->name('spending.destroy');
+
+//Route::resource('spending', SpendingController::class);
+Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
+Route::get('categories/{id}', [CategoriesController::class, 'show'])->name('categories.show');
