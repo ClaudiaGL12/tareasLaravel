@@ -10,6 +10,17 @@ use Illuminate\Http\RedirectResponse;
 
 class IncomeController extends Controller
 {
+    public array $links= [
+        "My Incomes" => "incomes",
+        "My Spending" => "spending",
+        "Categories" => "categories"
+    ];
+    //para compartir con todas las vistas
+    public function __construct()
+    {
+        view()->share('links', $this->links);
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -9,6 +9,17 @@ use App\Models\Spending;
 
 class SpendingController extends Controller
 {
+    public array $links= [
+        "My Spending" => "spending",
+        "My Incomes" => "incomes",
+        "Categories" => "categories"
+    ];
+    //para compartir con todas las vistas
+    public function __construct()
+    {
+        view()->share('links', $this->links);
+    }
+
     public function index()
     {
         $tableData = Spending::select('id','date', 'amount', 'category')->get()->toArray();

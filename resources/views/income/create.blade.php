@@ -1,4 +1,4 @@
-<x-layouts.index :title="$title">
+<x-layouts.index :title="$title" :links="$links">
   @if ($errors->any())
     <x-alert message="Parece que ha habido algunos problemas."/>
   @endif
