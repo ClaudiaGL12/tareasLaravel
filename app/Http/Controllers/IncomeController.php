@@ -13,7 +13,7 @@ class IncomeController extends Controller
     public array $links= [
         "My Incomes" => "incomes",
         "My Spending" => "spending",
-        "Categories" => "categories"
+        //"Categories" => "categories"
     ];
     //para compartir con todas las vistas
     public function __construct()

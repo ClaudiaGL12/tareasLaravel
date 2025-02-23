@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //use DB;
 use App\Models\Spending;
+use Illuminate\Http\RedirectResponse;
 
 
 class SpendingController extends Controller
@@ -12,7 +13,7 @@ class SpendingController extends Controller
     public array $links= [
         "My Spending" => "spending",
         "My Incomes" => "incomes",
-        "Categories" => "categories"
+        //"Categories" => "categories"
     ];
     //para compartir con todas las vistas
     public function __construct()
