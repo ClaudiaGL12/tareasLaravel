@@ -11,22 +11,9 @@ class SpendingController extends Controller
 {
     public function index()
     {
-        // $tableData = [
-        //     'heading' => [
-        //         'date','category','amount'
-        //     ],
-        //     'data' => [
-        //         ['12/12/2012','salary','2500'],
-        //         ['12/01/2013','salary','2500'],
-        //         ['12/02/2013','salary','2550']
-        //     ]
-        // ]; 
-
-        //$tableData = DB::table("spending")->select('date', 'amount', 'category')->get()->toArray();
-        $tableData = Spending::select('date', 'amount', 'category')->get()->toArray();
-        
+        $tableData = Spending::select('id','date', 'amount', 'category')->get()->toArray();
         //Aquí la lógica de negocio para el index
-        return view('spending.index',['title' => 'My spendings', 'tableData' => $tableData, 'anyadirSpending' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);
+        return view('spending.index',['title' => 'My spendings', 'tableData' => $tableData, 'pagina'=>'spending' ,'anyadirSpending' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);
         
     }
 
@@ -66,8 +53,8 @@ class SpendingController extends Controller
      */
     public function show(string $id)
     {
-        //
-        return '<p>Esta es la página del show de spendings</p>';
+        $spending = Spending::find($id)->get()->toArray();
+        return view('spending.show', ['title' => 'My spendings', 'title2'=>'spending: '.$id, 'spending' => $spending]);    
     }
 
     /**
@@ -75,8 +62,8 @@ class SpendingController extends Controller
      */
     public function edit(string $id)
     {
-        //
-        return '<p>Esta es la página del edit de spendings</p>';
+        $spending = Spending::find($id)->get()->toArray();
+        return view('spending.edit', ['title' => 'My spendings', 'title2'=>'spending: '.$id, 'spending' => $spending]);    
     }
 
     /**
@@ -84,7 +71,20 @@ class SpendingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = $request->validate([
+            'date' => 'required',
+            'amount' => 'required|min:1|decimal:2',
+            'category' => 'required|in:ingresos,pagas',
+        ]);
+        
+        $spending = Spending::find([
+            //'date' => now(),
+            'date' => $request->date,
+            'amount' => $request->amount,
+            'category' => $request->category,
+        ]);
+
+        return redirect('spending');
         
     }
 

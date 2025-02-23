@@ -27,9 +27,10 @@ class IncomeController extends Controller
         // ]; 
 
         //$tableData = DB::table("incomes")->select('date', 'amount', 'category')->get()->toArray();
-        $tableData = Income::select('date', 'amount', 'category')->get()->toArray();
+        $tableData = Income::select('id','date', 'amount', 'category')->get()->toArray();
+        //$tableData = Income::all();
         //Aquí la lógica de negocio para el index
-        return view('income.index',['title' => 'My incomes', 'tableData' => $tableData, 'anyadirIncome' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);
+        return view('income.index',['title' => 'My incomes', 'tableData' => $tableData, 'pagina' => 'incomes', 'anyadirIncome' => ['type' => 'a', 'enlace' =>'https://laravel.com/']]);
         
     }
 
@@ -38,7 +39,6 @@ class IncomeController extends Controller
      */
     public function create(Request $request)
     {
-        // dump($request);
         return view('income.create', ['title' => 'New income']);
     }
 
@@ -68,7 +68,8 @@ class IncomeController extends Controller
      */
     public function show(string $id)
     {
-        return '<p>Esta es la página del show de incomes</p>';
+        $income = Income::find($id)->get()->toArray();
+        return view('income.show', ['title' => 'My incomes', 'title2' => 'income: '.$id , 'income' => $income]);
     }
 
     /**
@@ -76,8 +77,8 @@ class IncomeController extends Controller
      */
     public function edit(string $id)
     {
-        //
-        return '<p>Esta es la página del edit de incomes</p>';
+        $income = Income::find($id)->get()->toArray();
+        return view('income.edit', ['title' => 'My incomes', 'title2' => 'income: '.$id , 'income' => $income]);
     }
 
     /**
@@ -85,7 +86,20 @@ class IncomeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = $request->validate([
+            'date' => 'required',
+            'amount' => 'required|min:1|decimal:2',
+            'category' => 'required|in:ingresos,pagas',
+        ]);
+        
+        $income = Income::find([
+            //'date' => now(),
+            'date' => $request->date,
+            'amount' => $request->amount,
+            'category' => $request->category,
+        ]);
+
+        return redirect('incomes');
         
     }
 
